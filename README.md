@@ -75,7 +75,7 @@ We verified whether product_id had any missing values. Since this is the primary
 SELECT DISTINCT product_type
 FROM products;
 ```
-Checked all unique values of product_type to identify missing, empty, or inconsistent entries. This ensured that all product categories are correct and match the expected values: Produce, Meat, Dairy, Bakery, Snacks.
+Checked all unique values of product_type to identify missing, empty, or inconsistent entries. This ensured that all product categories are correct and match the expected values: Produce, Meat, Dairy, Bakery, and Snacks.
 
 ### 4. Explore brand
 
@@ -87,18 +87,100 @@ FROM products;
 ```
 We checked for unique brands to spot missing values (NULL), placeholder characters (-), capitalization, or spacing issues. This was important for later analysis to avoid counting the same brand multiple times incorrectly.
 
+### 5. Explore the weight column
 
+```sql
+--- Exploring the weight column for NULLs, empty strings, missing, or inconsistent data
 
+SELECT weight
+FROM products
+WHERE weight IS NULL;
+```
+Checked for missing or NULL weights. We also noticed some rows had text like 'grams' instead of numeric values. This would need transformation before analysis.
 
+### 6. Explore the price column
 
+```sql
+--- Exploring price column for NULLs, empty strings, missing, or inconsistent data
 
+SELECT price
+FROM products
+WHERE price IS NULL;
+```
+Validated whether any price values are missing. Since price is crucial for analysis, ensuring no NULLs exist was necessary.
 
+### 7. Price statistics
 
+```sql
+--- Looking for Max, Min, and Avg prices in our dataset
 
+SELECT 
+	AVG(price),
+	MAX(price),
+	MIN(price)
+FROM products;
+```
+Calculated average, maximum, and minimum prices to understand the pricing range for all products. This helps identify outliers or unusual pricing.
 
+### 8. Explore average_units_sold column
 
+```sql
+--- Exploring the average_units_sold column for NULLs, empty strings, missing, or inconsistent data
 
+SELECT average_units_sold
+FROM products
+WHERE average_units_sold IS NULL;
+```
+Checked for missing values in the average_units_sold column, which is important to evaluate sales trends.
 
+### 9. Average_units_sold statistics
+
+```sql
+--- Looking for Max, Min, and Average average_units_sold Sold in our dataset
+
+SELECT 
+	MAX(average_units_sold),
+	MIN(average_units_sold)
+FROM products;
+```
+Determined the range of units sold to understand product popularity and spot potential outliers.
+
+### 10. Explore year_added
+
+```sql
+--- Exploring the year_added column for NULLs, empty strings, missing, or inconsistent data
+
+SELECT DISTINCT year_added
+FROM products;
+```
+Reviewed all unique years products were added to identify missing values. Some rows were NULL due to a system bug in 2022.
+
+### 11. Explore stock_location
+
+```sql
+--- Exploring the stock location column for NULLs, empty strings, missing, or inconsistent data
+
+SELECT DISTINCT stock_location
+FROM products;
+```
+Checked all unique warehouse locations. Ensured capitalization consistency (A, B, C, D) and flagged invalid or missing values.
+
+### 12. Check table structure
+
+```sql
+--- Understanding the table structure and data types of all the columns
+
+SELECT 
+    column_name, 
+    data_type
+FROM information_schema.columns
+WHERE table_name = 'products';
+```
+Checked the data types of all columns to confirm they match expectations and to identify any necessary type conversions during cleaning.
+
+Exploring the sample rows and data types helped identify missing, inconsistent, or malformed values. Understanding the dataset structure ensured cleaning steps targeted the correct columns, enabling accurate analysis without errors. It also helps isolate all missing, inconsistent, or incorrectly formatted values. It was critical to understand the data quality before applying transformations, ensuring accurate insights later.
+
+### 13. 
 
 
 
