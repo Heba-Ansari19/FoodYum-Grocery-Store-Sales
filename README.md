@@ -359,11 +359,5 @@ This project demonstrated how SQL can **transform raw, inconsistent product data
 ## REFERENCE
 
 * [DataCamp](https://app.datacamp.com/)
-
-
-
-
-
-
-
-
+<br>
+<br>
